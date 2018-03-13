@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-app="ifootball">
+			<form style="width:50%;margin-left:50px;">
+				<test-directive></test-directive>
+				<div class="form-group">
+					<label>Who is your favorite football player?</label>
+					<input type="text" ng-model="name" placeholder="please enter name." class="form-control">				
+				</div>
+				<div ng-controller="PositionCtrl" class="form-control">
+						<select ng-model="selectedName" ng-options="x for x in positions">
+						</select>
+						Player Position  : {{selectedName}}
+				</div>					
+					<label>Your favorite football player is {{name}}.</label>	
+				<div ng-controller="CurrencyCtrl">
+				<div class="form-group">
+					<label>Budget</label>
+					<input type="number" ng-model="money" placeholder="please enter money(baht)." class="form-control">
+				</div>
+					<label>Your budget is {{bathToPound(money)|currency:"£"}} pound .</label>	
+				</div>
+			</form>
+		</div>
+
+
+		<script type="text/javascript">
+				var footballapp = angular.module("ifootball",[]);
+					footballapp.controller("CurrencyCtrl",function($scope){
+
+							
+							$scope.bathToPound = function(thaibath){
+								return thaibath / 43.5493134  ;
+							}
+					});
+
+					footballapp.controller("PositionCtrl",function($scope){
+						  $scope.positions = ["GK", "RB", "CB","LB"];
+					});
+
+					footballapp.directive('testDirective',function(){
+						return{
+							template : '<h1 class="display-4">Budget request for team building 2017-2018</h1>'
+						}
+					});
+
+					
+		</script>
+	</body>
+</html>
